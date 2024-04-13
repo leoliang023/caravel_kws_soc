@@ -1,1 +1,14 @@
 this is the README file for my kws soc
+
+This repository contains a SoC based on caravel SoC.
+The main idea is to implement the kws feature on the user project wrapper with a harden module.
+
+When it is enabled, the harden module will moonitor the audio input stream 
+and when a matched keyword is spotted, it triggers an interrupt to the management wrapper, 
+the processor will deal with this interrupt.
+When the kws module is disable, it is waiting for enable signal to switch into working status.
+
+The software interrupt program will be running on the processor.
+
+
+The detailed architecture and control methodology is still under consideration.
