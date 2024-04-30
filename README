@@ -3,7 +3,8 @@ this is the README file for my kws soc
 This repository contains a SoC based on caravel SoC.
 The main idea is to implement the kws feature on the user project wrapper with a harden module.
 
-When it is enabled, the harden module will moonitor the audio input stream 
+When it is enabled, the harden module will monitor the audio input stream
+(16 bit i2s stream collected with an inmp441 microphone) from gpio
 and when a matched keyword is spotted, it triggers an interrupt to the management wrapper, 
 the processor will deal with this interrupt.
 When the kws module is disable, it is waiting for enable signal to switch into working status.
@@ -12,3 +13,64 @@ The software interrupt program will be running on the processor.
 
 
 The detailed architecture and control methodology is still under consideration.
+
+## Audio input 
+
+The Google Speech Command Dataset is a dataset widely used for keyword spotting.  
+In the GSCD, 
+>Each utterance is stored as a one-second (or less)
+WAVE format file, with the sample data encoded as
+linear 16-bit single-channel PCM values, at a 16 KHz
+rate.
+Therefore, we can choose a similar datatype as GSCD, with a 16KHz 16-bit single channle audio stream.
+The i2s interface of inmp441 module is capable of straming 24 bit single channle stream in a frame,
+and the data format is two’s complement(signed integer), MSB-first.
+We can simply truncate the higher 16 bits as our input stream.
+
+The inmp441 module has ### ports needed to be connected to the caravel board,
+- SCK
+- WS 
+- SD
+
+
+### control panel 
+SCK frequency
+
+WS 
+
+### datapath
+GPIO
+
+
+SD
+
+
+
+
+
+## MFCC implementation
+
+When we have decide the data format of i2s  audio stream, we then need to consider how to perform a MFCC on it.
+A simplified MFCC feature-extraction algorithm had been proposed in [1], but it is conducted by sotware.
+We will try to implement this algorithm in our SoC in the form of hardware.
+
+///////figure
+
+
+## NN accelerator
+
+
+In the paper mentioned in last section, a neural network structure named "" is also proposed
+
+
+We may also consider other neural network, like SNN/BNN
+
+
+## interrupt triggered by kws match
+
+
+
+
+
+
+## power/clock domain consideration

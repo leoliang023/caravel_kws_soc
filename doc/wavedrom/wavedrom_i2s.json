@@ -1,0 +1,29 @@
+{signal: [
+  {name: 'clk', wave: 'P...................................' },
+  {node:'..a......................b...'},
+  {node:'.................c'},
+  {name: 'ws', node:".de..............................h",wave: '10...............................1..', phase:0.5},
+  
+  {            node:".f...............................g", phase:0.5},
+  
+  {name: 'sd', wave: '1.222222222222222222222222z.........',phase:0.5, data : 'MSB 14 13 12 11 10 9 8 7 6 5 4 3 2 1 LSB'},
+], 
+ 
+ head:{
+   text:'WaveDrom i2s',
+   tick:0,
+   every:1
+ },
+ foot:{
+  text:'clk 1.024MHz, f_{ws} 1.6kHz, vect[15:0] avaliable at rising edge of ws',
+   tock:1
+ },
+ 
+ edge:["a+b 24 bits", "a~c 16 bits","d~e","e~a",
+       "f~g 32 cycles","g~h ready to read a 16 bit vect",
+       "c-h ser2vect"
+  
+       ]
+ 
+ 
+}

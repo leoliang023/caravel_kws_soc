@@ -1,0 +1,25 @@
+{signal: [
+  {name: 'ws',        wave: 'n...................................' },
+  {name: "data[15:0]", wave:"222222222222"    ,phase: 0.5 },
+  {name:"internal_frame_cnt:", wave:"0222222222222222222222",data:" 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 15 14 13 12 11" ,phase: 0.5 },
+  {name: "frame_start",wave:"010..............10..",phase: 0.5   },
+  {name: "frame_end",wave:"0...............10...",phase: 0.5       },
+  {    node:'.a...............b',phase: 0.5  },
+  {    node:''},
+  
+], 
+ 
+ head:{
+   text:'WaveDrom ser2vect',
+   tick:0,
+   every:1
+ },
+ foot:{
+  text:'f_{ws} 1.6kHz  data[15:0] is read at rising edge of ws,',
+   tock:1
+ },
+ 
+ edge:["a-b 16 cycles "]
+ 
+ 
+}
