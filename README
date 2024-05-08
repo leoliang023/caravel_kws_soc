@@ -3,8 +3,12 @@ this is the README file for my kws soc
 This repository contains a SoC based on caravel SoC.
 The main idea is to implement the kws feature on the user project wrapper with a harden module.
 
+
+
+
+
 When it is enabled, the harden module will monitor the audio input stream
-(16 bit i2s stream collected with an inmp441 microphone) from gpio
+(16 bit i2s stream collected with an inmp441 microphone) from gpio on board
 and when a matched keyword is spotted, it triggers an interrupt to the management wrapper, 
 the processor will deal with this interrupt.
 When the kws module is disable, it is waiting for enable signal to switch into working status.
@@ -12,11 +16,11 @@ When the kws module is disable, it is waiting for enable signal to switch into w
 The software interrupt program will be running on the processor.
 
 
-The detailed architecture and control methodology is still under consideration.
+The detailed architecture and control methodology is consisted of the following modules
 
 ## Audio input 
 
-The Google Speech Command Dataset is a dataset widely used for keyword spotting.  
+The Google Speech Command Dataset(GSCD) is a dataset widely used for keyword spotting.  
 In the GSCD, 
 >Each utterance is stored as a one-second (or less)
 WAVE format file, with the sample data encoded as
@@ -27,22 +31,29 @@ The i2s interface of inmp441 module is capable of straming 24 bit single channle
 and the data format is two’s complement(signed integer), MSB-first.
 We can simply truncate the higher 16 bits as our input stream.
 
-The inmp441 module has ### ports needed to be connected to the caravel board,
+The inmp441 module has at least ports needed to be connected to the caravel SoC,
 - SCK
 - WS 
 - SD
 
+optionally, 
+- MCK 
 
 ### control panel 
 SCK frequency
+we can determinie the SCK frequency:
+f_{ws} * 32 * 2 
 
-WS 
+WS = 1.6kHz
+
 
 ### datapath
-GPIO
+GPIO on board --- i2s interface  --- SD
+---  serial to vector [15:0] ---
+MFCC calulate
 
-
-SD
+## other material
+see the material/  doc/
 
 
 

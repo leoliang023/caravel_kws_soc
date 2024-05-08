@@ -1,0 +1,3 @@
+[submodule "hw/user-project"]
+	path = hw/user-project
+	url = https://github.com/leoliang023/caravel-kws-user-project.git
